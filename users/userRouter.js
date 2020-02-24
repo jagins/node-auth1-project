@@ -4,9 +4,11 @@ const bcrypt = require('bcryptjs');
 
 const Users = require('./users-model');
 
+const {PrivateRoute} = require('../utils');
+
 const router = express.Router();
 
-router.get('/users', (req, res) =>
+router.get('/users', PrivateRoute, (req, res) =>
 {
     Users.find()
     .then(users =>
