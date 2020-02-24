@@ -4,12 +4,17 @@ const helmet = require('helmet');
 
 const userRouter = require('./users/userRouter');
 
+const authRouter = require('./auth/authRouter');
+
+const {PrivateRoute} = require('./utils');
+
 const server = express();
 
 server.use(helmet());
 server.use(express.json());
 
-server.use('/api', userRouter);
+server.use('/api', authRouter);
+server.use('/api/restricted', PrivateRoute, userRouter);
 
 server.get('/', (req, res) =>
 {
