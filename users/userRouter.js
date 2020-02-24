@@ -8,7 +8,15 @@ const router = express.Router();
 
 router.get('/users', (req, res) =>
 {
-    res.json({message: 'users endpoint'});
+    Users.find()
+    .then(users =>
+    {
+        res.status(200).json(users);
+    })
+    .catch(error =>
+    {
+        res.status(500).json({error: 'Unable to connect to the database'});
+    })
 })
 
 router.post('/register', (req, res) =>
@@ -49,7 +57,7 @@ router.post('/login', (req, res) =>
         }
         else
         {
-            res.status(401).json({message: 'YOU SHALL NOT PASS!'})
+            res.status(401).json({message: 'YOU SHALL NOT PASS!'});
         }
     })
     .catch(error =>

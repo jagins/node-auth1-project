@@ -25,7 +25,7 @@ function findUser(user)
 
 function find()
 {
-
+    return database('users');
 }
 
 module.exports = {
