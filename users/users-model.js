@@ -18,6 +18,11 @@ function findUserById(id)
         .first();
 }
 
+function findUser(user)
+{
+    return database('users').select('id', 'username', 'password').where(user)
+}
+
 function find()
 {
 
@@ -26,5 +31,6 @@ function find()
 module.exports = {
     addUser,
     findUserById,
+    findUser,
     find
 }
