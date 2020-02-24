@@ -13,7 +13,7 @@ function addUser(user)
 function findUserById(id)
 {
     return database('users')
-        .select('id', 'username', 'password')
+        .select('id', 'username')
         .where({id})
         .first();
 }
