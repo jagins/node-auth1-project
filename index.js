@@ -11,7 +11,9 @@ const {PrivateRoute} = require('./utils');
 const session = require('express-session');
 const knexStore = require('connect-session-knex')(session);
 const knex = require('./data/db-config');
-require('dotenv').config();
+const dotenv = require('dotenv');
+
+dotenv.config({path: './config.env'});
 
 const server = express();
 
