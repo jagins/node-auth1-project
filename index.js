@@ -10,6 +10,7 @@ const {PrivateRoute} = require('./utils');
 
 const session = require('express-session');
 const knexStore = require('connect-session-knex')(session);
+const knex = require('./data/db-config');
 
 const server = express();
 
@@ -19,7 +20,7 @@ const sessionConfig = {
     resave: false,
     saveUninitialized: true,
     cookie: {
-        maxAge = 1000 * 60 * 10,
+        maxAge: 1000 * 60 * 10,
         secure: false,
         httpOnly: true
     },
