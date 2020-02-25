@@ -11,12 +11,13 @@ const {PrivateRoute} = require('./utils');
 const session = require('express-session');
 const knexStore = require('connect-session-knex')(session);
 const knex = require('./data/db-config');
+require('dotenv').config();
 
 const server = express();
 
 const sessionConfig = {
     name: 'session',
-    secret: 'shh secret',
+    secret: process.env.secret,
     resave: false,
     saveUninitialized: true,
     cookie: {
