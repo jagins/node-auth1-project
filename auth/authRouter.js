@@ -22,6 +22,7 @@ router.post('/register', (req, res) =>
         Users.addUser(user)
         .then(newUser =>
         {
+            res.session.loggedIn = true;
             res.status(201).json(newUser);
         })
         .catch(error =>
