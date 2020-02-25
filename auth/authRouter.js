@@ -40,6 +40,8 @@ router.post('/login', (req, res) =>
     {
         if(user && bcrypt.compareSync(password, user.password))
         {
+            req.session.loggedIn = true;
+            req.session.username = user.username;
             res.status(200).json({message: `Welcome ${user.username}`});
         }
         else
@@ -51,6 +53,28 @@ router.post('/login', (req, res) =>
     {
         res.status(500).json({error: 'Unable to connect to the database'});
     })
+})
+
+router.get('/logout', (req, res) =>
+{
+    if(req.session)
+    {
+        req.session.destroy(error =>
+        {
+            if(error)
+            {
+                res.status(500).json({error: 'There was an error logging out'});
+            }
+            else
+            {
+                res.status(200).json({message: 'logged out'});
+            }
+        })
+    }
+    else
+    {
+        res.status(200).json({message: 'no session to delete'});
+    }
 })
 
 module.exports = router;
